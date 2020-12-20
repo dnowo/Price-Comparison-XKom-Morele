@@ -1,22 +1,32 @@
-import scrapy
+from bs4 import BeautifulSoup
+import requests
+from urllib import request
+
+from Item import Item
+
+xKomUrl = "https://www.x-kom.pl/"
 
 
-class ShopsSpider(scrapy.Spider):
-    name = "shop"
+def response(url: str):
+    html = request.urlopen(url).read().decode('utf8')
+    soup = BeautifulSoup(html, 'html.parser')
+    return soup
 
-    def start_requests(self):
-        urls = [
-            # "https://www.euro.com.pl/",
-            "https://www.morele.net/",
-            "https://www.x-kom.pl/"
-        ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
 
-    def parse(self, response):
-        page = response.url.split("/")[-2]
-        filename = f'{page}.html'
-        print(response.css('title'))
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log(f'Saved file {filename}')
+def scrapFromXkom(productQuery: str):
+    url = xKomUrl + "szukaj?q=" + productQuery.replace(" ", "%20")
+    soup = response(url)
+    aResults = soup.find_all("a", class_="sc-1h16fat-0 sc-1yu46qn-10 dFAarG", href=True)
+    for a in aResults:
+        print(a["href"])
+    if len(aResults) < 1:
+        print("Nie znaleziono przedmiotu!")
+        return None
+    productUrl = xKomUrl + aResults[0]["href"]
+    print(productUrl)
+    soupProduct = response(productUrl)
+    productAvailable = False
+    if soupProduct.find("span", class_="sc-1hdxfw1-1 cMQxDU") is not None:
+        productAvailable = True
+    product = Item("x-kom", soupProduct.find("h1", class_="sc-1x6crnh-5").text, soupProduct.find("div", class_="u7xnnm-4 iVazGO").text, productAvailable)
+    return product
