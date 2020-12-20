@@ -5,6 +5,8 @@ from shopscrapper import scrapFromXkom, scrapFromMorele
 
 
 def calculateDiffrence(xkom, morele):
+    if xkom.product_price == "Brak danych" or morele.product_price == "Brak danych":
+        return "Brak danych do porównania ceny"
     xkomPrice = float(xkom.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
     morelePrice = float(morele.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
     if xkomPrice < morelePrice:
