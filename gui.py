@@ -4,6 +4,15 @@ from PyQt5.QtCore import pyqtSlot
 from shopscrapper import scrapFromXkom, scrapFromMorele
 
 
+def calculateDiffrence(xkom, morele):
+    xkomPrice = float(xkom.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
+    morelePrice = float(morele.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
+    if xkomPrice < morelePrice:
+        return "Mniejszą cenę o " + str(round(float(morelePrice - xkomPrice), 2)) + " ma x-kom.pl"
+    if morelePrice < xkomPrice:
+        return "Mniejszą cenę o " + str(round(float(xkomPrice - morelePrice), 2)) + " ma Morele.net"
+
+
 class Gui(QWidget):
 
     def __init__(self):
@@ -81,20 +90,46 @@ class Gui(QWidget):
     def runScraping(self):
         xKomProduct = scrapFromXkom(self.textboxCompareNameInput.text())
         moreleProduct = scrapFromMorele(self.textboxCompareNameInput.text())
-        err = -1
+
         errString = ["Nie mogę znaleźć przedmiotu w sklepie: "]
+        if xKomProduct == 0 and moreleProduct == 0:
+            self.labelError.setText(errString[0] + "Morele.net oraz x-kom.pl")
+            self.labelXkomComparedItem.setText("")
+            self.labelXkomShopName.setText("")
+            self.labelXkomItemPrice.setText("")
+            self.labelXkomItemAvailability.setText("")
+            self.labelMoreleComparedItem.setText("")
+            self.labelMoreleShopName.setText("")
+            self.labelMoreleItemPrice.setText("")
+            self.labelMoreleItemAvailability.setText("")
+            return
 
         if xKomProduct == 0:
             self.labelError.setText(errString[0] + "x-kom.pl")
-            err = 0
+            self.labelMoreleComparedItem.setText(str(moreleProduct.product_name))
+            self.labelMoreleShopName.setText(str(moreleProduct.shop_name))
+            self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
+            self.labelMoreleItemAvailability.setText(
+                str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
+            self.labelXkomComparedItem.setText("")
+            self.labelXkomShopName.setText("")
+            self.labelXkomItemPrice.setText("")
+            self.labelXkomItemAvailability.setText("")
+            return
+
         if moreleProduct == 0:
             self.labelError.setText(errString[0] + "Morele.net")
-            err = 1
-        if xKomProduct == 0 and moreleProduct == 0:
-            self.labelError.setText(errString[0] + "Morele.net oraz x-kom.pl")
-            err = 2
-        if err != -1:
+            self.labelXkomComparedItem.setText(str(xKomProduct.product_name))
+            self.labelXkomShopName.setText(str(xKomProduct.shop_name))
+            self.labelXkomItemPrice.setText(str(xKomProduct.product_price))
+            self.labelXkomItemAvailability.setText(
+                str("Dostępny" if xKomProduct.product_availability is True else "Niedostępny"))
+            self.labelMoreleComparedItem.setText("")
+            self.labelMoreleShopName.setText("")
+            self.labelMoreleItemPrice.setText("")
+            self.labelMoreleItemAvailability.setText("")
             return
+
         self.labelError.setText("")
 
         # Item from XKom.pl
@@ -110,4 +145,6 @@ class Gui(QWidget):
         self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
         self.labelMoreleItemAvailability.setText(
             str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
-        
+
+        # Calc price diffrence
+        self.labelDiffrence.setText(calculateDiffrence(xKomProduct, moreleProduct))
