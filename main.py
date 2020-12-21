@@ -22,16 +22,15 @@ class MainWindow(QMainWindow):
 
 
 stylesheet = """
-    MainWindow {
-        background-image: url("bg.png"); 
-        background-repeat: repeat-x; 
-    }
-"""
+                MainWindow {
+                    background-image: url("bg.png"); 
+                    background-repeat: repeat-x; 
+                }
+             """
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyleSheet(stylesheet)
     window = MainWindow()
     window.show()
-    # gui = gui.Gui()
     sys.exit(app.exec_())

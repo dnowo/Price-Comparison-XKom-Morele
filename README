@@ -1,0 +1,6 @@
+Projekt opiera się na działaniu algorytmu wyszukiwarek x-kom oraz morele.
+Według mnie lepszą wyszukiwarką jest wyszukiwarka na x-kom, zatem najpierw program szuka produktu tam,
+następnie zabiera jego kod producenta i wyszukuje w morele po kodzie producenta. Jeśli nie znajdzie
+poprzez ten kod - wtedy wyszukuje normalnie najlepszy wynik.
+
+W obu przeglądarkach wybierany jest ZAWSZE najlepszy traf.

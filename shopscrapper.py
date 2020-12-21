@@ -102,7 +102,6 @@ def scrapFromMorele(productQuery: str):
         productAvailableString = soupProduct.find("div", class_="prod-available-items").text
 
     productAvailableString = productAvailableString.replace("\n", "")
-    print("'"+productAvailableString +"'")
     if len(productAvailableString) != 0:
         for r in (("Dostępnych", ""), ("szt.", ""), (" ", ""), ("Zostało", ""), ("tylko", ""), ("Została", "")):
             productAvailableString = productAvailableString.replace(*r)
