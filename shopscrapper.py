@@ -30,7 +30,7 @@ def scrapFromXkom(productQuery: str):
     if len(aResults) < 1:
         print("Nie znaleziono przedmiotu!")
         return 0
-    productUrl = xKomUrl + aResults[0]["href"]
+    productUrl = xKomUrl + str(aResults[0]["href"]).replace("/", "", 1)
     print(productUrl)
     soupProduct = responseXkom(productUrl)
     global producentCode
@@ -47,7 +47,8 @@ def scrapFromXkom(productQuery: str):
                                                                                        class_="sc-1x6crnh-5") is not None else "Brak danych",
                 soupProduct.find("div", class_="u7xnnm-4 iVazGO").text if soupProduct.find("div",
                                                                                            class_="u7xnnm-4 iVazGO") is not None else "Brak danych",
-                productAvailable)
+                productAvailable,
+                productUrl)
 
 
 def scrapFromMoreleIfRedirect(productQuery: str):
@@ -71,7 +72,7 @@ def scrapFromMoreleIfRedirect(productQuery: str):
     else:
         productAvailableString = soupProduct.find("div", class_="prod-available-items").text
 
-    for r in (("Dostępnych", ""), ("szt.", ""), (" ", ""), ("Zostało", ""), ("tylko", "")):
+    for r in (("Dostępnych", ""), ("szt.", ""), (" ", ""), ("Zostało", ""), ("tylko", ""), ("Została", "")):
         productAvailableString = productAvailableString.replace(*r)
     if productAvailableString is None or int(productAvailableString) < 1:
         productAvailable = False
@@ -81,7 +82,8 @@ def scrapFromMoreleIfRedirect(productQuery: str):
                                                                                     class_="prod-name") is not None else "Brak danych",
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] if
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] is not None else "Brak danych",
-                productAvailable)
+                productAvailable,
+                productUrl)
 
 
 def scrapFromMorele(productQuery: str):
@@ -100,8 +102,9 @@ def scrapFromMorele(productQuery: str):
         productAvailableString = soupProduct.find("div", class_="prod-available-items").text
 
     productAvailableString = productAvailableString.replace("\n", "")
+    print("'"+productAvailableString +"'")
     if len(productAvailableString) != 0:
-        for r in (("Dostępnych", ""), ("szt.", ""), (" ", ""), ("Zostało", ""), ("tylko", "")):
+        for r in (("Dostępnych", ""), ("szt.", ""), (" ", ""), ("Zostało", ""), ("tylko", ""), ("Została", "")):
             productAvailableString = productAvailableString.replace(*r)
         if productAvailableString is None or int(productAvailableString) < 1 or len(productAvailableString) <= 0:
             productAvailable = False
@@ -111,4 +114,5 @@ def scrapFromMorele(productQuery: str):
     return Item("Morele.net",
                 soupProduct.find("h1", class_="prod-name").text if soupProduct.find("h1", class_="prod-name") is not None else "Brak danych",
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] if len(soupProduct.find_all("div", class_="product-price")) > 0 else "Brak danych",
-                productAvailable)
+                productAvailable,
+                url)

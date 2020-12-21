@@ -1,3 +1,4 @@
+from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QGridLayout, QLineEdit, QDesktopWidget
 from PyQt5.QtCore import pyqtSlot
 
@@ -28,20 +29,20 @@ class Gui(QWidget):
         self.labelXkomShopName = QLabel(self)
         self.labelXkomItemPrice = QLabel(self)
         self.labelXkomItemAvailability = QLabel(self)
+        self.labelXkomItemLink = QLabel(self)
 
         self.labelMoreleShopName = QLabel(self)
         self.labelMoreleItemPrice = QLabel(self)
         self.labelMoreleItemAvailability = QLabel(self)
+        self.labelMoreleItemLink = QLabel(self)
 
         self.labelError = QLabel(self)
-
         self.labelDiffrence = QLabel(self)
 
         self.initUI()
 
     def initUI(self):
         grid = QGridLayout()
-
         # Input label, textbox, button
         self.labelCompareNameInput.setText("Wprowadź słowa kluczowe przedmiotu: ")
         self.labelCompareNameInput.adjustSize()
@@ -59,33 +60,39 @@ class Gui(QWidget):
         grid.addWidget(self.labelError, 2, 2)
 
         self.labelDiffrence.adjustSize()
-        grid.addWidget(self.labelDiffrence, 7, 2)
+        grid.addWidget(self.labelDiffrence, 8, 2)
 
         # Show diffrence
         self.labelXkomShopName.adjustSize()
         self.labelXkomItemPrice.adjustSize()
         self.labelXkomItemAvailability.adjustSize()
         self.labelXkomComparedItem.adjustSize()
+        self.labelXkomItemLink.adjustSize()
+        self.labelXkomItemLink.setOpenExternalLinks(True)
 
         grid.addWidget(self.labelXkomShopName, 3, 1)
         grid.addWidget(self.labelXkomComparedItem, 4, 1)
         grid.addWidget(self.labelXkomItemPrice, 5, 1)
         grid.addWidget(self.labelXkomItemAvailability, 6, 1)
+        grid.addWidget(self.labelXkomItemLink, 7, 1)
 
         self.labelMoreleShopName.adjustSize()
         self.labelMoreleItemPrice.adjustSize()
         self.labelMoreleItemAvailability.adjustSize()
         self.labelMoreleComparedItem.adjustSize()
+        self.labelMoreleItemLink.adjustSize()
+        self.labelMoreleItemLink.setOpenExternalLinks(True)
 
         grid.addWidget(self.labelMoreleShopName, 3, 3)
         grid.addWidget(self.labelMoreleComparedItem, 4, 3)
         grid.addWidget(self.labelMoreleItemPrice, 5, 3)
         grid.addWidget(self.labelMoreleItemAvailability, 6, 3)
+        grid.addWidget(self.labelMoreleItemLink, 7, 3)
 
         # Show gui
         self.setLayout(grid)
         self.move(QDesktopWidget().availableGeometry().center())
-        self.setWindowTitle("Porównaj ceny w sklepach")
+
         self.show()
 
     @pyqtSlot()
@@ -99,11 +106,13 @@ class Gui(QWidget):
             self.labelXkomComparedItem.setText("")
             self.labelXkomShopName.setText("")
             self.labelXkomItemPrice.setText("")
+            self.labelXkomItemLink.setText("")
             self.labelXkomItemAvailability.setText("")
             self.labelMoreleComparedItem.setText("")
             self.labelMoreleShopName.setText("")
             self.labelMoreleItemPrice.setText("")
             self.labelMoreleItemAvailability.setText("")
+            self.labelMoreleItemLink.setText("")
             return
 
         if xKomProduct == 0:
@@ -111,12 +120,15 @@ class Gui(QWidget):
             self.labelMoreleComparedItem.setText(str(moreleProduct.product_name))
             self.labelMoreleShopName.setText(str(moreleProduct.shop_name))
             self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
+            self.labelMoreleItemLink.setText(
+                str("<a href=\"" + moreleProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
             self.labelMoreleItemAvailability.setText(
                 str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
             self.labelXkomComparedItem.setText("")
             self.labelXkomShopName.setText("")
             self.labelXkomItemPrice.setText("")
             self.labelXkomItemAvailability.setText("")
+            self.labelXkomItemLink.setText("")
             return
 
         if moreleProduct == 0:
@@ -124,12 +136,14 @@ class Gui(QWidget):
             self.labelXkomComparedItem.setText(str(xKomProduct.product_name))
             self.labelXkomShopName.setText(str(xKomProduct.shop_name))
             self.labelXkomItemPrice.setText(str(xKomProduct.product_price))
+            self.labelXkomItemLink.setText(str("<a href=\"" + xKomProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
             self.labelXkomItemAvailability.setText(
                 str("Dostępny" if xKomProduct.product_availability is True else "Niedostępny"))
             self.labelMoreleComparedItem.setText("")
             self.labelMoreleShopName.setText("")
             self.labelMoreleItemPrice.setText("")
             self.labelMoreleItemAvailability.setText("")
+            self.labelMoreleItemLink.setText("")
             return
 
         self.labelError.setText("")
@@ -138,6 +152,7 @@ class Gui(QWidget):
         self.labelXkomComparedItem.setText(str(xKomProduct.product_name))
         self.labelXkomShopName.setText(str(xKomProduct.shop_name))
         self.labelXkomItemPrice.setText(str(xKomProduct.product_price))
+        self.labelXkomItemLink.setText(str("<a href=\"" + xKomProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
         self.labelXkomItemAvailability.setText(
             str("Dostępny" if xKomProduct.product_availability is True else "Niedostępny"))
 
@@ -145,6 +160,7 @@ class Gui(QWidget):
         self.labelMoreleComparedItem.setText(str(moreleProduct.product_name))
         self.labelMoreleShopName.setText(str(moreleProduct.shop_name))
         self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
+        self.labelMoreleItemLink.setText(str("<a href=\"" + moreleProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
         self.labelMoreleItemAvailability.setText(
             str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
 
