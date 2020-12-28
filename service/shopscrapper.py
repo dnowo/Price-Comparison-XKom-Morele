@@ -2,11 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 from urllib import request
 
-from Item import Item
+from model.Item import Item
 
 xKomUrl = "https://www.x-kom.pl/"
 moreleUrl = "https://www.morele.net/"
 producentCode = ""
+productImage = ""
 
 
 def responseXkom(url: str):
@@ -40,15 +41,21 @@ def scrapFromXkom(productQuery: str):
         if t[0] == "Kod producenta":
             producentCode = t[1]
     productAvailable = False
+
+    global productImage
+    productImage = soupProduct.find("img", class_="sc-1tblmgq-1 bxjRuC")["src"] if soupProduct.find("img", class_="sc-1tblmgq-1 bxjRuC") is not None else ""
+
     if soupProduct.find("span", class_="sc-1hdxfw1-1 cMQxDU") is not None:
         productAvailable = True
+
     return Item("x-kom",
                 soupProduct.find("h1", class_="sc-1x6crnh-5").text if soupProduct.find("h1",
                                                                                        class_="sc-1x6crnh-5") is not None else "Brak danych",
                 soupProduct.find("div", class_="u7xnnm-4 iVazGO").text if soupProduct.find("div",
                                                                                            class_="u7xnnm-4 iVazGO") is not None else "Brak danych",
                 productAvailable,
-                productUrl)
+                productUrl,
+                productImage)
 
 
 def scrapFromMoreleIfRedirect(productQuery: str):
@@ -83,7 +90,8 @@ def scrapFromMoreleIfRedirect(productQuery: str):
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] if
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] is not None else "Brak danych",
                 productAvailable,
-                productUrl)
+                productUrl,
+                "")
 
 
 def scrapFromMorele(productQuery: str):
@@ -114,4 +122,5 @@ def scrapFromMorele(productQuery: str):
                 soupProduct.find("h1", class_="prod-name").text if soupProduct.find("h1", class_="prod-name") is not None else "Brak danych",
                 soupProduct.find_all("div", class_="product-price")[0]["data-default"] if len(soupProduct.find_all("div", class_="product-price")) > 0 else "Brak danych",
                 productAvailable,
-                url)
+                url,
+                "")

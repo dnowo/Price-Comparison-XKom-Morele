@@ -1,8 +1,12 @@
-from PyQt5 import QtGui, QtCore
+import urllib
+
+from PyQt5 import QtCore
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QGridLayout, QLineEdit, QDesktopWidget
 from PyQt5.QtCore import pyqtSlot
 
-from shopscrapper import scrapFromXkom, scrapFromMorele
+from service.shopscrapper import scrapFromXkom, scrapFromMorele
+from view.vieweditor import productLinkFormat
 
 
 def calculateDiffrence(xkom, morele):
@@ -36,6 +40,7 @@ class Gui(QWidget):
         self.labelMoreleItemAvailability = QLabel(self)
         self.labelMoreleItemLink = QLabel(self)
 
+        self.labelImage = QLabel(self)
         self.labelError = QLabel(self)
         self.labelDiffrence = QLabel(self)
 
@@ -59,8 +64,11 @@ class Gui(QWidget):
         self.labelError.adjustSize()
         grid.addWidget(self.labelError, 2, 2)
 
+        self.labelImage.adjustSize()
+        grid.addWidget(self.labelImage, 3, 2)
+
         self.labelDiffrence.adjustSize()
-        grid.addWidget(self.labelDiffrence, 8, 2)
+        grid.addWidget(self.labelDiffrence, 9, 2)
 
         # Show diffrence
         self.labelXkomShopName.adjustSize()
@@ -70,11 +78,11 @@ class Gui(QWidget):
         self.labelXkomItemLink.adjustSize()
         self.labelXkomItemLink.setOpenExternalLinks(True)
 
-        grid.addWidget(self.labelXkomShopName, 3, 1)
-        grid.addWidget(self.labelXkomComparedItem, 4, 1)
-        grid.addWidget(self.labelXkomItemPrice, 5, 1)
-        grid.addWidget(self.labelXkomItemAvailability, 6, 1)
-        grid.addWidget(self.labelXkomItemLink, 7, 1)
+        grid.addWidget(self.labelXkomShopName, 4, 1)
+        grid.addWidget(self.labelXkomComparedItem, 5, 1)
+        grid.addWidget(self.labelXkomItemPrice, 6, 1)
+        grid.addWidget(self.labelXkomItemAvailability, 7, 1)
+        grid.addWidget(self.labelXkomItemLink, 8, 1)
 
         self.labelMoreleShopName.adjustSize()
         self.labelMoreleItemPrice.adjustSize()
@@ -83,11 +91,11 @@ class Gui(QWidget):
         self.labelMoreleItemLink.adjustSize()
         self.labelMoreleItemLink.setOpenExternalLinks(True)
 
-        grid.addWidget(self.labelMoreleShopName, 3, 3)
-        grid.addWidget(self.labelMoreleComparedItem, 4, 3)
-        grid.addWidget(self.labelMoreleItemPrice, 5, 3)
-        grid.addWidget(self.labelMoreleItemAvailability, 6, 3)
-        grid.addWidget(self.labelMoreleItemLink, 7, 3)
+        grid.addWidget(self.labelMoreleShopName, 4, 3)
+        grid.addWidget(self.labelMoreleComparedItem, 5, 3)
+        grid.addWidget(self.labelMoreleItemPrice, 6, 3)
+        grid.addWidget(self.labelMoreleItemAvailability, 7, 3)
+        grid.addWidget(self.labelMoreleItemLink, 8, 3)
 
         # Show gui
         self.setLayout(grid)
@@ -99,7 +107,7 @@ class Gui(QWidget):
     def runScraping(self):
         xKomProduct = scrapFromXkom(self.textboxCompareNameInput.text())
         moreleProduct = scrapFromMorele(self.textboxCompareNameInput.text())
-
+        moreleProduct.product_image = xKomProduct.product_image
         errString = ["Nie mogę znaleźć przedmiotu w sklepie: "]
         if xKomProduct == 0 and moreleProduct == 0:
             self.labelError.setText(errString[0] + "Morele.net oraz x-kom.pl")
@@ -120,8 +128,7 @@ class Gui(QWidget):
             self.labelMoreleComparedItem.setText(str(moreleProduct.product_name))
             self.labelMoreleShopName.setText(str(moreleProduct.shop_name))
             self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
-            self.labelMoreleItemLink.setText(
-                str("<a href=\"" + moreleProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
+            self.labelMoreleItemLink.setText(productLinkFormat(moreleProduct))
             self.labelMoreleItemAvailability.setText(
                 str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
             self.labelXkomComparedItem.setText("")
@@ -136,7 +143,7 @@ class Gui(QWidget):
             self.labelXkomComparedItem.setText(str(xKomProduct.product_name))
             self.labelXkomShopName.setText(str(xKomProduct.shop_name))
             self.labelXkomItemPrice.setText(str(xKomProduct.product_price))
-            self.labelXkomItemLink.setText(str("<a href=\"" + xKomProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
+            self.labelXkomItemLink.setText(productLinkFormat(xKomProduct))
             self.labelXkomItemAvailability.setText(
                 str("Dostępny" if xKomProduct.product_availability is True else "Niedostępny"))
             self.labelMoreleComparedItem.setText("")
@@ -152,7 +159,7 @@ class Gui(QWidget):
         self.labelXkomComparedItem.setText(str(xKomProduct.product_name))
         self.labelXkomShopName.setText(str(xKomProduct.shop_name))
         self.labelXkomItemPrice.setText(str(xKomProduct.product_price))
-        self.labelXkomItemLink.setText(str("<a href=\"" + xKomProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
+        self.labelXkomItemLink.setText(productLinkFormat(xKomProduct))
         self.labelXkomItemAvailability.setText(
             str("Dostępny" if xKomProduct.product_availability is True else "Niedostępny"))
 
@@ -160,9 +167,16 @@ class Gui(QWidget):
         self.labelMoreleComparedItem.setText(str(moreleProduct.product_name))
         self.labelMoreleShopName.setText(str(moreleProduct.shop_name))
         self.labelMoreleItemPrice.setText(str(moreleProduct.product_price))
-        self.labelMoreleItemLink.setText(str("<a href=\"" + moreleProduct.product_link + "\">" + "Strona przedmiotu" + "</a>"))
+        self.labelMoreleItemLink.setText(productLinkFormat(moreleProduct))
         self.labelMoreleItemAvailability.setText(
             str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
+
+        # Set image
+        if len(xKomProduct.product_image) > 1:
+            data = urllib.request.urlopen(xKomProduct.product_image).read()
+            image = QImage()
+            image.loadFromData(data)
+            self.labelImage.setPixmap(QPixmap(image).scaled(150, 150, QtCore.Qt.KeepAspectRatio))
 
         # Calc price diffrence
         self.labelDiffrence.setText(calculateDiffrence(xKomProduct, moreleProduct))

@@ -8,3 +8,4 @@ class Item:
     product_price: str
     product_availability: bool
     product_link: str
+    product_image: str
