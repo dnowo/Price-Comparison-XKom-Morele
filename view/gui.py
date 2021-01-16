@@ -172,11 +172,14 @@ class Gui(QWidget):
             str("Dostępny" if moreleProduct.product_availability is True else "Niedostępny"))
 
         # Set image
+        print(xKomProduct.product_image)
         if len(xKomProduct.product_image) > 1:
-            data = urllib.request.urlopen(xKomProduct.product_image).read()
-            image = QImage()
-            image.loadFromData(data)
-            self.labelImage.setPixmap(QPixmap(image).scaled(150, 150, QtCore.Qt.KeepAspectRatio))
+                data = urllib.request.urlopen(xKomProduct.product_image).read()
+                image = QImage()
+                image.loadFromData(data)
+                self.labelImage.setPixmap(QPixmap(image).scaled(150, 150, QtCore.Qt.KeepAspectRatio))
+        else:
+            self.labelImage.setText("Brak zdjęcia")
 
         # Calc price diffrence
         self.labelDiffrence.setText(calculateDiffrence(xKomProduct, moreleProduct))

@@ -4,3 +4,7 @@ następnie zabiera jego kod producenta i wyszukuje w morele po kodzie producenta
 poprzez ten kod - wtedy wyszukuje normalnie najlepszy wynik.
 
 W obu przeglądarkach wybierany jest ZAWSZE najlepszy traf.
+
+Jeśli wystiąpią jakieś błędy to wina tego, że wyszukiwarka i sklep morele
+mają zbyt dużo zmiennych wartości zależnie od produktów, za co przepraszam.
+Nie byłem w stanie wyłapać wszystkich możliwości dla algorytmu.
