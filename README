@@ -3,7 +3,8 @@ Według mnie lepszą wyszukiwarką jest wyszukiwarka na x-kom, zatem najpierw pr
 następnie zabiera jego kod producenta i wyszukuje w morele po kodzie producenta. Jeśli nie znajdzie
 poprzez ten kod - wtedy wyszukuje normalnie najlepszy wynik.
 
-W obu przeglądarkach wybierany jest ZAWSZE najlepszy traf.
+
+W obu wyszukiwarkach wybierany jest ZAWSZE najlepszy traf zależny od słów kluczowych.
 
 Jeśli wystiąpią jakieś błędy to wina tego, że wyszukiwarka i sklep morele
 mają zbyt dużo zmiennych wartości zależnie od produktów, za co przepraszam.
