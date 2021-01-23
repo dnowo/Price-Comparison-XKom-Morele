@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow#MainWindow {
+background-color: #9d91a3;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget {
+background-color: #9d91a3;
+}</string>
+   </property>
+   <widget class="QPushButton" name="buttonCheckPrice">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>50</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#buttonCheckPrice{
+font-size:10px;
+color: white;
+border-width:1px;
+border-radius:5px;
+background-color:#C49792;
+border-style:outset;
+border-color:#edaf97;
+padding:4px;
+}
+QPushButton#buttonCheckPrice:hover {
+background-color: #edaf97;
+border-style: inset;
+}</string>
+    </property>
+    <property name="text">
+     <string>Pobierz ceny</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineInputKeywords">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>9</y>
+      <width>771</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+border-width:1px;
+border-radius:5px;
+background-color:#C49792;
+border-style:outset;
+border-color:#C49792;
+padding:4px;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelError">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>621</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#labelError{
+
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+
+}
+QLabel#labelErro:hover {
+background-color: #EDAF97;
+border-style: inset;
+}</string>
+    </property>
+    <property name="text">
+     <string>Błąd</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelDiffrence">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>510</y>
+      <width>511</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Różnica cen</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelXkomComparedItem">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>350</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>XKom Nazwa produktu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMoreleComparedItem">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>120</y>
+      <width>350</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Morele Nazwa Produktu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelXkomShopName">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>200</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Nazwa sklepu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelXkomItemPrice">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>351</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Cena</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelXkomItemLink">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>360</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Link</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelXkomItemAvailability">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Dostępność produktu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelImage">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>601</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMoreleShopName">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>200</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Nazwa sklepu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMoreleItemPrice">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>280</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Cena</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMoreleItemLink">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>360</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Link</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMoreleItemAvailability">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>440</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: white;
+background-color:#ad91a3;
+border-style:outset;
+padding:4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Dostępność produktu</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>labelImage</zorder>
+   <zorder>buttonCheckPrice</zorder>
+   <zorder>lineInputKeywords</zorder>
+   <zorder>labelError</zorder>
+   <zorder>labelDiffrence</zorder>
+   <zorder>labelXkomComparedItem</zorder>
+   <zorder>labelMoreleComparedItem</zorder>
+   <zorder>labelXkomShopName</zorder>
+   <zorder>labelXkomItemPrice</zorder>
+   <zorder>labelXkomItemLink</zorder>
+   <zorder>labelXkomItemAvailability</zorder>
+   <zorder>labelMoreleShopName</zorder>
+   <zorder>labelMoreleItemPrice</zorder>
+   <zorder>labelMoreleItemLink</zorder>
+   <zorder>labelMoreleItemAvailability</zorder>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
