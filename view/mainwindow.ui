@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>792</width>
-    <height>600</height>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,20 +15,20 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow#MainWindow {
-background-color: #9d91a3;
+background-color: #cdd0cb;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">QWidget#centralwidget {
-background-color: #9d91a3;
+background-color: #cdd0cb;
 }</string>
    </property>
    <widget class="QPushButton" name="buttonCheckPrice">
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>50</y>
+      <y>60</y>
       <width>141</width>
       <height>31</height>
      </rect>
@@ -36,16 +36,15 @@ background-color: #9d91a3;
     <property name="styleSheet">
      <string notr="true">QPushButton#buttonCheckPrice{
 font-size:10px;
-color: white;
+color: black;
 border-width:1px;
 border-radius:5px;
-background-color:#C49792;
+background-color:#7c9473;
 border-style:outset;
-border-color:#edaf97;
 padding:4px;
 }
 QPushButton#buttonCheckPrice:hover {
-background-color: #edaf97;
+background-color: #cfdac8;
 border-style: inset;
 }</string>
     </property>
@@ -56,9 +55,9 @@ border-style: inset;
    <widget class="QLineEdit" name="lineInputKeywords">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>180</x>
       <y>9</y>
-      <width>771</width>
+      <width>601</width>
       <height>31</height>
      </rect>
     </property>
@@ -69,9 +68,8 @@ font-size:10px;
 color: white;
 border-width:1px;
 border-radius:5px;
-background-color:#C49792;
+background-color:#7c9473;
 border-style:outset;
-border-color:#C49792;
 padding:4px;
 }</string>
     </property>
@@ -83,25 +81,20 @@ padding:4px;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>60</y>
       <width>621</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel#labelError{
-
+     <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
 
-}
-QLabel#labelErro:hover {
-background-color: #EDAF97;
-border-style: inset;
 }</string>
     </property>
     <property name="text">
@@ -117,8 +110,8 @@ border-style: inset;
    <widget class="QLabel" name="labelDiffrence">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>510</y>
+      <x>140</x>
+      <y>500</y>
       <width>511</width>
       <height>31</height>
      </rect>
@@ -127,10 +120,11 @@ border-style: inset;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -156,10 +150,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -185,10 +180,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -214,10 +210,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -243,10 +240,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -272,10 +270,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -301,10 +300,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -349,10 +349,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -378,10 +379,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -407,10 +409,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -436,10 +439,11 @@ padding:4px;
      <string notr="true">QLabel{
 font: 10pt &quot;Segoe Print&quot;;
 font-size:10px;
-color: white;
-background-color:#ad91a3;
+color: black;
+background-color:#e8eae6;
 border-style:outset;
 padding:4px;
+
 }</string>
     </property>
     <property name="text">
@@ -450,6 +454,30 @@ padding:4px;
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font: 10pt &quot;Segoe Print&quot;;
+font-size:10px;
+color: black;
+
+border-style:outset;
+padding:4px;
+
+}</string>
+    </property>
+    <property name="text">
+     <string>Wprowadź słowa kluczowe:</string>
     </property>
    </widget>
    <zorder>labelImage</zorder>
@@ -467,6 +495,7 @@ padding:4px;
    <zorder>labelMoreleItemPrice</zorder>
    <zorder>labelMoreleItemLink</zorder>
    <zorder>labelMoreleItemAvailability</zorder>
+   <zorder>label</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

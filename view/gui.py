@@ -1,8 +1,9 @@
+import sys
 import urllib
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPixmap, QImage, QIcon
-from PyQt5.QtWidgets import QDesktopWidget, QMainWindow
+from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QLabel, QWidget
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.uic import loadUi
 
@@ -15,14 +16,7 @@ def calculateDiffrence(xkom, morele):
         return "Brak danych do porównania ceny"
     xkomPrice = float(xkom.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
     morelePrice = float(morele.product_price.replace("zł", "").replace(" ", "").replace(",", "."))
-    print("xkom")
-    print(xkomPrice)
-    print(xkomPrice)
-    print(xkomPrice)
-    print("Morele")
-    print(morelePrice)
-    print(morelePrice)
-    print(morelePrice)
+
     if xkomPrice < morelePrice:
         return "Mniejszą cenę o " + str(round(float(morelePrice - xkomPrice), 2)) + " ma x-kom.pl"
     if morelePrice < xkomPrice:
@@ -111,18 +105,27 @@ class Gui(QMainWindow):
 
         # Set image
         print(xKomProduct.product_image)
-        if len(xKomProduct.product_image) > 1:
-            data = urllib.request.urlopen(xKomProduct.product_image).read()
-            image = QImage()
-            image.loadFromData(data)
-            self.labelImage.setPixmap(QPixmap(image))
-            # .scaled(150, 150, QtCore.Qt.KeepAspectRatio)
-        else:
-            self.labelImage.setText("Brak zdjęcia")
+        self.showImage(xKomProduct.product_image)
 
         # Calc price diffrence
         self.labelDiffrence.show()
         self.labelDiffrence.setText(calculateDiffrence(xKomProduct, moreleProduct))
+
+    def showImage(self, product_image: str):
+        win = QMainWindow(self)
+        win.setGeometry(50, 50, 400, 300)
+        win.setWindowTitle("Zdjęcie produktu")
+        label = QLabel("", win)
+        label.setGeometry(0, 0, 400, 300)
+        label.setScaledContents(True)
+        if len(product_image) > 1:
+            data = urllib.request.urlopen(product_image).read()
+            image = QImage()
+            image.loadFromData(data)
+            label.setPixmap(QPixmap(image).scaled(400, 300, QtCore.Qt.KeepAspectRatio))
+        else:
+            label.setText("Brak zdjęcia")
+        win.show()
 
     def hideLabelsMorele(self):
         self.labelMoreleComparedItem.hide()
